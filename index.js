@@ -16,7 +16,8 @@ const run = async() => {
         await client.connect();
 
         app.get('/tasks', async (req, res) => {
-            const result = await taskCollection.find({}).toArray();
+            const userEmail = req.headers.email;
+            const result = await taskCollection.find({userEmail: userEmail}).toArray();
             res.send(result)
         })
 
